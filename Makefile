@@ -24,14 +24,15 @@ include $(DEVKITARM)/ds_rules
 # ICON is the image used to create the game icon, leave blank to use default rule
 # NITRO is a directory that will be accessible via NitroFS
 #---------------------------------------------------------------------------------
-TARGET   := $(shell basename $(CURDIR))
-BUILD    := build
-SOURCES  := src
-INCLUDES := include
-DATA     := 
-GRAPHICS := data
-AUDIO    :=
-ICON     := 
+TARGET    := $(shell basename $(CURDIR))
+BUILD     := build
+SOURCES   := src
+INCLUDES  := include
+DATA      := 
+GRAPHICS  := data
+AUDIO     :=
+ICON      :=
+MELON_DIR := /d/Rachit_Pendrive/Games/Emulators/MelonDS/
 
 # specify a directory which contains the nitro filesystem
 # this is relative to the Makefile
@@ -160,7 +161,7 @@ endif
 
 run: $(BUILD)
 	@echo runnning ...
-	@/d/Rachit_Pendrive/Games/Emulators/MelonDS/melonDS.exe $(TARGET).nds
+	@$(MELON_DIR)/melonDS.exe $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 $(BUILD):
