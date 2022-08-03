@@ -3,5 +3,6 @@
 
 #include <nds/ndstypes.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 #endif

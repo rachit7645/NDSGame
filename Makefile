@@ -28,10 +28,10 @@ TARGET   := $(shell basename $(CURDIR))
 BUILD    := build
 SOURCES  := src
 INCLUDES := include
-DATA     := data
-GRAPHICS :=
+DATA     := 
+GRAPHICS := data
 AUDIO    :=
-ICON     :=
+ICON     := 
 
 # specify a directory which contains the nitro filesystem
 # this is relative to the Makefile

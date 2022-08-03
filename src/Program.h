@@ -28,6 +28,8 @@ typedef union _DSKeys
 	u32 rawValue;
 } DSKeys;
 
+extern size_t frameCounter;
+
 void Program_Run();
 void Program_MainLoop();
 
