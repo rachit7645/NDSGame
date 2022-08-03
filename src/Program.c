@@ -5,18 +5,18 @@
 #include <nds/arm9/console.h>
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 // Variables
 DSKeys        keys;
 touchPosition touch;
+size_t        frames;
 
 void Program_Run()
 {
 	// Init program
 	consoleDemoInit();
-	iprintf("System initialsed.");
+	iprintf("\x1b[0;0HSystem initialsed.");
 	// Call main loop
 	Program_MainLoop();
 }
@@ -37,8 +37,12 @@ void Program_MainLoop()
 			break;
 		}
 
+		// Touch handler 
 		touchRead(&touch);
-		iprintf("\x1b[3;0HTouch X: %4u", touch.rawx);
-		iprintf("\x1b[4;0HTouch Y: %4u", touch.rawy);
+		iprintf("\x1b[2;0HTouch X: %4u", touch.rawx);
+		iprintf("\x1b[3;0HTouch Y: %4u", touch.rawy);
+		
+		frames++;
+		iprintf("\x1b[5;0HFrame Count: %u", frames);
 	}
 }

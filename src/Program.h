@@ -1,7 +1,7 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include <nds/ndstypes.h>
+#include "Util.h"
 
 // Keys struct
 // Equivalent to u32
