@@ -3,5 +3,6 @@
 
 void Program_Run();
 void Program_MainLoop();
+void Program_InitData();
 
 #endif
