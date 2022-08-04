@@ -2,7 +2,7 @@
 
 #include <nds/interrupts.h>
 
-#include "Program.h"
+#include "Global.h"
 
 void IRQ_Init()
 {

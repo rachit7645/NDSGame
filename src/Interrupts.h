@@ -1,9 +1,9 @@
 #ifndef INTERRUPTS_H
 #define INTERRUPTS_H
 
-#include "Util.h"
-
+// Initialise interrupts
 void IRQ_Init();
+// Vertical Blank Interrupt
 void IRQ_VBlank();
 
 #endif
