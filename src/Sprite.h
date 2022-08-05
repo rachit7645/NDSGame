@@ -4,6 +4,8 @@
 #include <nds/ndstypes.h>
 #include <nds/arm9/sprite.h>
 
+#define NUM_SPRITES 1
+
 typedef struct _Sprite
 {
 	u16*              gfx;

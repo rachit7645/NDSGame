@@ -13,6 +13,8 @@ void GFX_Init();
 void GFX_InitBG();
 // Initialise sprites
 void GFX_InitSprites(int count, Sprite* sprites);
+// Update graphics
+void GFX_Update();
 // Update sprites
 void GFX_UpdateSprites(int count, Sprite* sprites);
 // Free memory

@@ -4,5 +4,6 @@
 #include <stddef.h>
 
 extern size_t frameCounter;
+extern int    spriteAngle;
 
 #endif

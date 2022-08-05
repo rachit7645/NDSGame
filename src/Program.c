@@ -4,6 +4,7 @@
 #include <nds/interrupts.h>
 #include <nds/arm9/console.h>
 #include <nds/arm9/exceptions.h>
+#include <nds/arm9/decompress.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,16 +18,13 @@
 #include "Sprite.h"
 #include "Macros.h"
 
-// TODO: Replace consoleDemoInit with proper DS calls
+// Global variables
+size_t frameCounter = 0;
 
-#define NUM_SPRITES 1
-
-// Variables
+// Other variables
 DSKeys        keys;
 touchPosition touch;
 Sprite        sprites[NUM_SPRITES];
-size_t        frameCounter = 0;
-size_t        angle        = 0;
 
 void Program_Run()
 {
@@ -42,10 +40,9 @@ void Program_Run()
 	GFX_InitBG();
 	GFX_InitSprites(NUM_SPRITES, sprites);
 
-	dmaFillHalfWords(ARGB16(1, 31, 0, 0), sprites[0].gfx, sprites[0].size);
-
 	iprintf("\x1b[0;0HSystem initialsed.");
 	Program_MainLoop();
+	
 	GFX_FreeMemory(NUM_SPRITES, sprites);
 }
 
@@ -54,8 +51,6 @@ void Program_MainLoop()
 	while(true)
 	{
 		GFX_UpdateSprites(NUM_SPRITES, sprites);
-		oamRotateScale(&oamMain, 0, angle, (1 << 8), (1 << 8));
-		angle += 64;
 
 		swiWaitForVBlank();
 
@@ -69,9 +64,9 @@ void Program_MainLoop()
 		iprintf("\x1b[3;0HTouch Y: %4u", touch.rawy);
 
 		iprintf("\x1b[5;0HFrame Count:    %u", frameCounter);
-		iprintf("\x1b[6;0HRotation Angle: %u", angle);
+		iprintf("\x1b[6;0HRotation Angle: %u", spriteAngle);
 
-		oamUpdate(&oamMain);
+		GFX_Update();
 	}
 }
 

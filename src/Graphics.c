@@ -7,6 +7,10 @@
 #include <stdbool.h>
 
 #include "bg0.h"
+#include "spr0.h"
+
+// Global variables
+int spriteAngle = 0;
 
 void GFX_Init()
 {
@@ -34,6 +38,9 @@ void GFX_InitSprites(int count, Sprite* sprites)
 	{
 		sprites[i].gfx = oamAllocateGfx(&oamMain, sprites[i].size, sprites[i].format);
 	}
+
+	// Set up sprite one
+	decompress(spr0Bitmap, sprites[0].gfx, LZ77Vram);
 }
 
 void GFX_UpdateSprites(int count, Sprite* sprites)
@@ -59,6 +66,9 @@ void GFX_UpdateSprites(int count, Sprite* sprites)
 			false
 		);
 	}
+
+	oamRotateScale(&oamMain, 0, spriteAngle, (1 << 8), (1 << 8));
+	spriteAngle += 64;
 }
 
 void GFX_FreeMemory(int count, Sprite* sprites)
@@ -67,4 +77,9 @@ void GFX_FreeMemory(int count, Sprite* sprites)
 	{
 		oamFreeGfx(&oamMain, sprites[i].gfx);
 	}
+}
+
+void GFX_Update()
+{
+	oamUpdate(&oamMain);
 }
