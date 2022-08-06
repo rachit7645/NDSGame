@@ -7,9 +7,9 @@ $(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>dev
 endif
 
 # These set the information text in the nds file
-#GAME_TITLE     := My Wonderful Homebrew
-#GAME_SUBTITLE1 := built with devkitARM
-#GAME_SUBTITLE2 := http://devitpro.org
+GAME_TITLE     := DS Snake
+GAME_SUBTITLE1 := | Made by Rachit Khandelwal
+GAME_SUBTITLE2 := | https://www.github.com/rachit7645/
 
 include $(DEVKITARM)/ds_rules
 
@@ -32,7 +32,7 @@ DATA      :=
 GRAPHICS  := data
 AUDIO     :=
 ICON      :=
-MELON_DIR := /d/Rachit_Pendrive/Games/Emulators/MelonDS/
+EMULATOR  := /d/Rachit_Pendrive/Games/Emulators/DeSmuME/DeSmuME_0.9.13_x64.exe
 
 # specify a directory which contains the nitro filesystem
 # this is relative to the Makefile
@@ -161,7 +161,7 @@ endif
 
 run: $(BUILD)
 	@echo runnning ...
-	@$(MELON_DIR)/melonDS.exe $(TARGET).nds
+	@$(EMULATOR) $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 $(BUILD):

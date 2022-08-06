@@ -17,4 +17,15 @@ typedef struct _Sprite
 	int               y;
 } Sprite;
 
+void Sprite_Create
+(
+	Sprite* sprite,
+	SpriteSize size,
+	SpriteColorFormat format,
+	int rotationIndex,
+	int paletteAlpha,
+	int x,
+	int y
+);
+
 #endif

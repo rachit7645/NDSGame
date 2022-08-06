@@ -16,15 +16,15 @@
 #include "Input.h"
 #include "Global.h"
 #include "Sprite.h"
-#include "Macros.h"
+#include "Player.h"
+#include "Background.h"
 
 // Global variables
-size_t frameCounter = 0;
-
-// Other variables
+size_t        frameCounter = 0;
 DSKeys        keys;
 touchPosition touch;
 Sprite        sprites[NUM_SPRITES];
+
 
 void Program_Run()
 {
@@ -55,16 +55,22 @@ void Program_MainLoop()
 		swiWaitForVBlank();
 
 		Input_Get(&keys, &touch);
-		if(keys.start)
+		
+		if (keys.start)
 		{
 			break;
 		}
 
+		Player_Update();
+
 		iprintf("\x1b[2;0HTouch X: %4u", touch.rawx);
 		iprintf("\x1b[3;0HTouch Y: %4u", touch.rawy);
 
-		iprintf("\x1b[5;0HFrame Count:    %u", frameCounter);
-		iprintf("\x1b[6;0HRotation Angle: %u", spriteAngle);
+		iprintf("\x1b[5;0HSprite X: %4d", sprites[0].x);
+		iprintf("\x1b[6;0HSprite Y: %4d", sprites[0].y);
+
+		iprintf("\x1b[8;0HFrame Count:    %u", frameCounter);
+		iprintf("\x1b[9;0HRotation Angle: %u", spriteAngle);
 
 		GFX_Update();
 	}
@@ -72,14 +78,14 @@ void Program_MainLoop()
 
 void Program_InitData()
 {
-	for (int i = 0; i < NUM_SPRITES; ++i)
-	{
-		sprites[i].gfx           = 0;
-		sprites[i].size          = SpriteSize_32x32;
-		sprites[i].format        = SpriteColorFormat_Bmp;
-		sprites[i].rotationIndex = 0;
-		sprites[i].paletteAlpha  = 15;
-		sprites[i].x             = 20;
-		sprites[i].y             = 20 * i;
-	}
+	Sprite_Create
+	(
+		&sprites[0],           // Sprite
+		SpriteSize_32x32,      // Size
+		SpriteColorFormat_Bmp, // Color Format
+		0,                     // Rotation Index
+		15,                    // PaletteAlpha
+		0,                     // x
+		20                     // y
+	);
 }

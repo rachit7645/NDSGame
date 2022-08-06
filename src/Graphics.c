@@ -3,14 +3,19 @@
 #include <nds/arm9/decompress.h>
 #include <nds/arm9/console.h>
 #include <nds/arm9/sprite.h>
+#include <nds/arm9/sassert.h>
 
 #include <stdbool.h>
+#include <stddef.h>
+
+#include "Global.h"
 
 #include "bg0.h"
 #include "spr0.h"
 
 // Global variables
-int spriteAngle = 0;
+int        spriteAngle = 0;
+Background background;
 
 void GFX_Init()
 {
@@ -26,12 +31,24 @@ void GFX_Init()
 void GFX_InitBG()
 {
 	// Set up bitmap background
-	bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 0, 0);
+	Background_Create
+	(
+		&background,
+		0,
+		0,
+		3,
+		BgType_Bmp16,
+		BgSize_B16_256x256,
+		0, 
+		0
+	);
 	decompress(bg0Bitmap, BG_GFX, LZ77Vram);
 }
 
 void GFX_InitSprites(int count, Sprite* sprites)
 {
+	sassert(count > 0 && sprites != NULL, "Null Check Failed");
+
 	oamInit(&oamMain, SpriteMapping_1D_128, false);
 
 	for (int i = 0; i < count; ++i)
@@ -45,25 +62,27 @@ void GFX_InitSprites(int count, Sprite* sprites)
 
 void GFX_UpdateSprites(int count, Sprite* sprites)
 {
+	sassert(count > 0 && sprites != NULL, "Null Check Failed");
+
 	for (int i = 0; i < count; ++i)
 	{
 		oamSet
 		(
 			&oamMain,
-			i,
+			i,                        // ID
 			sprites[i].x,
 			sprites[i].y,
-			0,
+			0,                        // Priority
 			sprites[i].paletteAlpha,
 			sprites[i].size,
 			sprites[i].format,
 			sprites[i].gfx,
 			sprites[i].rotationIndex,
-			true,
-			false,
-			false,
-			false,
-			false
+			true,                     // Size Double
+			false,                    // Hide
+			false,                    // VFlip
+			false,                    // HFlip
+			false                     // Mosaic
 		);
 	}
 
@@ -73,6 +92,8 @@ void GFX_UpdateSprites(int count, Sprite* sprites)
 
 void GFX_FreeMemory(int count, Sprite* sprites)
 {
+	sassert(count > 0 && sprites != NULL, "Null Check Failed");
+
 	for (int i = 0; i < count; ++i)
 	{
 		oamFreeGfx(&oamMain, sprites[i].gfx);
@@ -81,5 +102,6 @@ void GFX_FreeMemory(int count, Sprite* sprites)
 
 void GFX_Update()
 {
+	bgUpdate();
 	oamUpdate(&oamMain);
 }
