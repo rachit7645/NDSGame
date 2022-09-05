@@ -40,7 +40,7 @@ void Program_Run()
 	GFX_InitBG();
 	GFX_InitSprites(NUM_SPRITES, sprites);
 
-	iprintf("\x1b[0;0HSystem initialsed.");
+	iprintf(TEXT_FMT(0, 0, "System initialsed."));
 	Program_MainLoop();
 	
 	GFX_FreeMemory(NUM_SPRITES, sprites);
@@ -63,14 +63,14 @@ void Program_MainLoop()
 
 		Player_Update();
 
-		iprintf("\x1b[2;0HTouch X: %4u", touch.rawx);
-		iprintf("\x1b[3;0HTouch Y: %4u", touch.rawy);
+		iprintf(TEXT_FMT(2, 0, "Touch X: %4u"), touch.rawx);
+		iprintf(TEXT_FMT(3, 0, "Touch Y: %4u"), touch.rawy);
 
-		iprintf("\x1b[5;0HSprite X: %4d", sprites[0].x);
-		iprintf("\x1b[6;0HSprite Y: %4d", sprites[0].y);
+		iprintf(TEXT_FMT(5, 0, "Sprite X: %4d"), sprites[0].x);
+		iprintf(TEXT_FMT(6, 0, "Sprite Y: %4d"), sprites[0].y);
 
-		iprintf("\x1b[8;0HFrame Count:    %u", frameCounter);
-		iprintf("\x1b[9;0HRotation Angle: %u", spriteAngle);
+		iprintf(TEXT_FMT(8, 0, "Frame Count:    %u"), frameCounter);
+		iprintf(TEXT_FMT(9, 0, "Rotation Angle: %u"), spriteAngle);
 
 		GFX_Update();
 	}
