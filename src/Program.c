@@ -84,8 +84,8 @@ void Program_InitData()
 		SpriteSize_32x32,      // Size
 		SpriteColorFormat_Bmp, // Color Format
 		0,                     // Rotation Index
-		15,                    // PaletteAlpha
-		0,                     // x
-		20                     // y
+		15,                    // Palette / Alpha
+		0,                     // X
+		20                     // Y
 	);
 }

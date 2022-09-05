@@ -3,6 +3,8 @@
 
 #include <nds/arm9/background.h>
 
+#include "Macros.h"
+
 typedef struct _Background
 {
 	int    id;

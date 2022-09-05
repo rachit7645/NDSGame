@@ -4,6 +4,18 @@
 
 #include <stddef.h>
 
+NDS_STATIC NDS_INLINE int Background_InitGFX(Background* background)
+{
+	return bgInit
+	(
+		background->layer,
+		background->type,
+		background->size,
+		background->mapBase,
+		background->tileBase
+	);
+}
+
 void Background_Create
 (
 	Background* background,
@@ -25,5 +37,5 @@ void Background_Create
 	background->size     = size;
 	background->mapBase  = mapBase;
 	background->tileBase = tileBase;
-	background->id       = bgInit(layer, type, size, mapBase, tileBase);
+	background->id       = Background_InitGFX(background);
 }

@@ -70,14 +70,14 @@ void GFX_UpdateSprites(int count, Sprite* sprites)
 		(
 			&oamMain,
 			i,                        // ID
-			sprites[i].x,
-			sprites[i].y,
+			sprites[i].x,             // X
+			sprites[i].y,             // Y
 			0,                        // Priority
-			sprites[i].paletteAlpha,
-			sprites[i].size,
-			sprites[i].format,
-			sprites[i].gfx,
-			sprites[i].rotationIndex,
+			sprites[i].paletteAlpha,  // Palette / Alpha
+			sprites[i].size,          // Size
+			sprites[i].format,        // Format
+			sprites[i].gfx,           // GFX
+			sprites[i].rotationIndex, // Rotation Index
 			true,                     // Size Double
 			false,                    // Hide
 			false,                    // VFlip
